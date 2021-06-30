@@ -15,7 +15,14 @@ type Reaction {
     createdAt: String
     username: String
 }
+
+type Auth{
+    token: ID!
+    user: User
+}
+
 type User{
+    _id: ID
     username: String
     email: String
     friendCount: Int
@@ -24,11 +31,19 @@ type User{
     friends: [User]
 }
 type Query{
+  me: User
   thoughts(username: String): [Thought]
   thought(_id: ID!) : Thought
   user(username: String!): User
   users: [User]
   
 }
+
+type Mutation{
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+}
+
+
 `
 module.exports = typeDefs
